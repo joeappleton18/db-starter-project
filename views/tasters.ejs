@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta name="description" content="" />
+    <title>World Wines</title>
+
+    <link
+      rel="canonical"
+      href="https://getbootstrap.com/docs/4.5/examples/album/"
+    />
+
+    <!-- Bootstrap core CSS -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+      crossorigin="anonymous"
+    />
+
+    <link href="css/album.css" rel="stylesheet" />
+  </head>
+  <body>
+    <%- include('common/header'); -%>
+<div class="container">
+    <div class="row col-md-12 col-md-offset-2 custyle mx-auto">
+        <h1 class="mx-auto"> 🍷 Wine Tasters 🍷</h1>
+    <table class="table table-striped custab">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Twitter</th>
+            <th>Tastings#</th>
+
+        </tr>
+    </thead>
+            <tr>
+                <td>1</td>
+                <td>Joe Appleton</td>
+                <td>@joeappleton18</td>
+                <td>100</td>
+                <td class="text-center"><a class='btn btn-info btn-xs' href="#"><span class="glyphicon glyphicon-edit"></span> Edit</a> <a href="#" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span> Del</a></td>
+            </tr>
+          
+    </table>
+    </div>
+    
+    
+
+    <%- include('common/footer') -%>
+  </body>
+</html>
