@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta name="description" content="" />
+    <title>World Wines</title>
+
+    <link
+      rel="canonical"
+      href="https://getbootstrap.com/docs/4.5/examples/album/"
+    />
+
+    <!-- Bootstrap core CSS -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+      crossorigin="anonymous"
+    />
+
+    <link href="css/album.css" rel="stylesheet" />
+  </head>
+  <body>
+    <%- include('common/header'); -%>
+<div class="container">
+    <div class="row col-md-12 col-md-offset-2 custyle mx-auto">
+      
+    <button type="button" class="btn btn-primary">Create a new taster</button> 
+    <h1 class="mx-auto"> 🍷 Wine Tastings  🍷  </h1>
+  
+  
+    <table class="table table-striped custab">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Price</th>
+            <th>Points</th>
+
+        </tr>
+
+        <%  
+        
+          tastings.forEach(taste => {
+            
+        %>
+
+            <tr>
+                <td><%=  taste.title  %></td>
+                <td><%=  taste.description  %></td>
+                <td><%=  taste.price  %></td>
+                <td><%=  taste.points  %></td>
+                <td class="text-center"><a class='btn btn-info btn-xs'><span class="glyphicon glyphicon-edit"></span> Edit</a> 
+                <a  href="/tastings/delete/<%= taste.id %>" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span> Del</a></td>
+            </tr>
+            
+         <%  
+          });
+         %>
+
+
+       
+    </thead>
+          
+    </table>
+    </div>
+    <div class="row col-md-12 col-md-offset-2 custyle mx-auto">
+    
+    
+    
+      <nav aria-label="Page navigation example">
+     
+     
+     
+        <ul class="pagination">
+
+          <% if (currentPage === 1) { %>
+            
+            <li class="page-item disabled"><a class="page-link" href="#">First</a></li>     
+          <% } %>  
+          <% if (currentPage > 1) { %>
+              <li class="page-item"><a class="page-link" href="/tastings">First</a></li>
+          <% } %>  
+
+            <li class="page-item"><a class="page-link" href="/tastings?page=<%= currentPage === numberOfPages ? currentPage - 10 :  currentPage + 1 %>"><%= currentPage === numberOfPages ? currentPage - 10 :  currentPage + 1 %></a></li>
+            <li class="page-item"><a class="page-link" href="/tastings?page=<%= currentPage === numberOfPages ? currentPage - 9 :  currentPage + 2 %>"><%= currentPage === numberOfPages ? currentPage - 9 :  currentPage + 2 %></a></li>
+            <li class="page-item"><a class="page-link" href="/tastings?page=<%= currentPage === numberOfPages ? currentPage - 8 :  currentPage + 3 %>"><%= currentPage === numberOfPages ? currentPage - 8 :  currentPage + 3 %></a></li>
+            <li class="page-item"><a class="page-link" href="/tastings?page=<%= currentPage === numberOfPages ? currentPage - 7 :  currentPage + 4 %>"><%= currentPage === numberOfPages ? currentPage - 7 :  currentPage + 4 %></a></li>
+            <li class="page-item"><a class="page-link" href="/tastings?page=<%= currentPage === numberOfPages ? currentPage - 6 :  currentPage + 5 %>"><%= currentPage === numberOfPages ? currentPage - 6 :  currentPage + 5 %></a></li>
+            <li class="page-item"><a class="page-link" href="/tastings?page=<%= currentPage === numberOfPages ? currentPage - 5 :  currentPage + 6 %>"><%= currentPage === numberOfPages ? currentPage - 5 :  currentPage + 6 %></a></li>
+            <li class="page-item"><a class="page-link" href="/tastings?page=<%= currentPage === numberOfPages ? currentPage - 4 :  currentPage + 7 %>"><%= currentPage === numberOfPages ? currentPage - 4 :  currentPage + 7 %></a></li>
+            <li class="page-item"><a class="page-link" href="/tastings?page=<%= currentPage === numberOfPages ? currentPage - 3 :  currentPage + 8 %>"><%= currentPage === numberOfPages ? currentPage - 3 :  currentPage + 8 %></a></li>
+            <li class="page-item"><a class="page-link" href="/tastings?page=<%= currentPage === numberOfPages ? currentPage - 2 :  currentPage + 9 %>"><%= currentPage === numberOfPages ? currentPage - 2 :  currentPage + 9 %></a></li>
+            <li class="page-item"><a class="page-link" href="/tastings?page=<%= currentPage === numberOfPages ? currentPage - 1 :  currentPage + 10 %>"><%= currentPage === numberOfPages ? currentPage - 1 :  currentPage + 10 %></a></li>
+        
+          <% if (currentPage === numberOfPages) { %>
+            
+            <li class="page-item disabled"><a class="page-link" href="">Last</a></li>     
+          <% } %>  
+          
+          <% if (currentPage < numberOfPages) { %>
+              <li class="page-item"><a class="page-link" href="/tastings?page=<%= numberOfPages %>">Last</a></li>
+          <% } %>  
+          
+          </ul>
+  </nav>
+    </div>
+    
+    <!-- PAGINATION ARTICLE: https://evdokimovm.github.io/javascript/nodejs/mongodb/pagination/expressjs/ejs/bootstrap/2017/08/20/create-pagination-with-nodejs-mongodb-express-and-ejs-step-by-step-from-scratch.html-->
+    <!--- https://medium.com/swlh/master-ejs-template-engine-with-node-js-and-expressjs-979cc22b69be-->
+    <%- include('common/footer') -%>
+  </body>
+</html>
