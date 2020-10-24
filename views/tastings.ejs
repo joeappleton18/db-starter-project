@@ -31,7 +31,7 @@
       
     
     <button type="button" class="btn btn-primary">Create a new taster</button> 
-    <h1 class="mx-auto"> 🍷 Wine Tasters 🍷  </h1>
+    <h1 class="mx-auto"> 🍷 Wine Tastings 🍷  </h1>
   
     <table class="table table-striped custab">
     <thead>
@@ -45,19 +45,13 @@
 
         <%  
         
-          tasters.forEach(taster => {
+          tastings.forEach(taste => {
             
         %>
 
             <tr>
-                <td><%=  taster._id  %></td>
-                <td><%=  taster.name  %></td>
-                <td><%=  (taster.twitter || "-") %></td>
-                <td><%=  taster.tastings  %></td>
-                
-                <td class="text-center"><a class='btn btn-info btn-xs'><span class="glyphicon glyphicon-edit"></span> Edit</a> 
-                  <a  href="/tasters/delete/<%= taster._id %>" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span> Del</a></td>
-                 
+                <td><%=  taste  %></td>
+              
             </tr>
             
          <%  
@@ -69,11 +63,21 @@
     </thead>
           
     </table>
-
-     
+    </div>
+    <div class="row col-md-12 col-md-offset-2 custyle mx-auto">
+      <nav>
+        <ul class="pagination pagination-sm">
+          <li class="page-item disabled">
+            <a class="page-link" href="#" tabindex="-1">1</a>
+          </li>
+          <li class="page-item"><a class="page-link" href="#">2</a></li>
+          <li class="page-item"><a class="page-link" href="#">3</a></li>
+        </ul>
+      </nav>
     </div>
     
-  
+    <!-- PAGINATION ARTICLE: https://evdokimovm.github.io/javascript/nodejs/mongodb/pagination/expressjs/ejs/bootstrap/2017/08/20/create-pagination-with-nodejs-mongodb-express-and-ejs-step-by-step-from-scratch.html-->
+    <!--- https://medium.com/swlh/master-ejs-template-engine-with-node-js-and-expressjs-979cc22b69be-->
     <%- include('common/footer') -%>
   </body>
 </html>
