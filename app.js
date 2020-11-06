@@ -38,9 +38,11 @@ app.get("/", (req, res) => {
   res.render("index");
 });
 
-app.get("/create-taster", (req, res) => {
-  res.render("create-taster");
-});
+
+
+
+
+app.post("/create-taster")
 
 app.get("/tasters", tasterController.list);
 app.get("/tasters/delete/:id", tasterController.delete);

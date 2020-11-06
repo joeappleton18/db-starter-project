@@ -28,10 +28,10 @@
     <body>
       <%- include('common/header'); -%>
       <div class="container">
-        <h1 class="text-center">Create A New Taster</h1>
+        <h1 class="text-center">Create A New Taster 🍷</h1>
         <div class="row justify-content-md-center">
           <div class="col-">
-            <form>
+            <form method="POST" action="/create-taster"> 
               <div class="form-group">
                 <label for="name">Taster Name</label>
                 <input
@@ -39,17 +39,14 @@
                   class="form-control"
                   id="name"
                   placeholder="Enter Name"
+                  name="name"
                 />
               </div>
-             <div class="form-group">
+              <div class="form-group">
                 <label for="name">Twitter Handle</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="name"
-                />
+                <input type="text" name="twitter" class="form-control" id="name" />
               </div>
-              
+
               <button type="submit" class="btn btn-primary">Submit</button>
             </form>
           </div>
