@@ -28,13 +28,14 @@
     <body>
       <%- include('common/header'); -%>
       <div class="container">
-        <h1 class="text-center">Create A New Taster 🍷</h1>
+        <h1 class="text-center">Update Taster🍷</h1>
         <div class="row justify-content-md-center">
           <div class="col-">
-            <form method="POST" action="/create-taster">
+            <form method="POST">
               <div class="form-group">
                 <label for="name">Taster Name</label>
                 <input
+                  value="<%= taster.name %>"
                   type="text"
                   class="form-control"
                   id="name"
@@ -45,6 +46,7 @@
               <div class="form-group">
                 <label for="name">Twitter Handle</label>
                 <input
+                  value="<%= taster.twitter %>"
                   type="text"
                   class="form-control"
                   id="twitter"

@@ -27,11 +27,23 @@
   <body>
     <%- include('common/header'); -%>
 <div class="container">
-    <div class="row col-md-12 col-md-offset-2 custyle mx-auto">
-      
     
-    <button type="button" class="btn btn-primary">Create a new taster</button> 
-    <h1 class="mx-auto"> 🍷 Wine Tasters 🍷  </h1>
+ <% if (message) {   %> 
+  <div class="row justify-content-md-center">
+    <div class="alert alert-primary" role="alert">
+          <%= message %>
+    </div>
+  </div>
+
+<% } %>
+
+<h1 class="text-justify"> 🍷 Wine Tasters 🍷  </h1>
+<div class="col-md-12 col-md-offset-2  justify-content-center">
+  <a role="button" class="btn btn-primary btn-xs" href="/create-taster">Create a new taster</a> 
+
+</div>
+  
+  <div class="col-md-12 col-md-offset-2">
   
     <table class="table table-striped custab">
     <thead>
@@ -55,7 +67,7 @@
                 <td><%=  (taster.twitter || "-") %></td>
                 <td><%=  taster.tastings  %></td>
                 
-                <td class="text-center"><a class='btn btn-info btn-xs'><span class="glyphicon glyphicon-edit"></span> Edit</a> 
+                <td class="text-center"><a class='btn btn-info btn-xs' href="/tasters/update/<%= taster.id %>" ><span class="glyphicon glyphicon-edit"></span> Edit</a> 
                   <a  href="/tasters/delete/<%= taster.id %>" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span> Del</a></td>
                  
             </tr>
