@@ -38,8 +38,8 @@ app.get("/", (req, res) => {
   res.render("index");
 });
 
-app.get("/create-tasters", (res, req) => {
-  res.render("create-tasters");
+app.get("/create-taster", (req, res) => {
+  res.render("create-taster");
 });
 
 app.get("/tasters", tasterController.list);
@@ -47,6 +47,7 @@ app.get("/tasters/delete/:id", tasterController.delete);
 
 app.get("/tastings", tastingController.list);
 app.get("/tastings/delete/:id", tastingController.delete);
+
 
 app.listen(WEB_PORT, () => {
   console.log(
