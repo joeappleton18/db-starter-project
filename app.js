@@ -37,7 +37,7 @@ mongoose.connection.on("error", (err) => {
 });
 
 /***
- * We are applying our middle
+ * We are applying our middlewear
  */
 app.use(express.static(path.join(__dirname, "public")));
 app.use(bodyParser.json());
@@ -48,7 +48,7 @@ app.get("/", (req, res) => {
 });
 
 app.get("/create-taster", (req, res) => {
-  res.render("create-taster");
+  res.render("create-taster", {errors: {}});
 });
 
 app.post("/create-taster", tasterController.create);

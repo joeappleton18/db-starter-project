@@ -4,8 +4,8 @@ const { Schema } = mongoose;
 const tasterSchema = new Schema(
   {
     twitter: String,
-    tastings: Number,
-    name: String,
+    tastings: { type: Number, default: 0 },
+    name: { type: String, required: [true, 'Name is required'], minlength: [3, "Name must be 4 chars long"] },
   },
   { timestamps: true }
 );

@@ -41,6 +41,10 @@
                   name="name"
                   placeholder="Enter Name"
                 />
+
+                <% if (errors['name']) { %>
+                <p style="color: red"><%= errors['name'].message %></p>
+                <% } %>
               </div>
               <div class="form-group">
                 <label for="name">Twitter Handle</label>
@@ -50,6 +54,9 @@
                   id="twitter"
                   name="twitter"
                 />
+                <% if (errors['twitter']) { %>
+                <p style="color: red"><%= errors['twitter'].message %></p>
+                <% } %>
               </div>
 
               <button type="submit" class="btn btn-primary">Submit</button>

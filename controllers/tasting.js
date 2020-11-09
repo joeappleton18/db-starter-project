@@ -18,7 +18,6 @@ exports.list = async (req, res) => {
       currentPage: page
     });
   } catch (e) {
-    console.log(e);
     res.status(404).send({ message: "could not list tastings" });
   }
 };
