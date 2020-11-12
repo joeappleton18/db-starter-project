@@ -48,7 +48,7 @@ app.get("/", (req, res) => {
 });
 
 app.get("/create-taster", (req, res) => {
-  res.render("create-taster", {errors: {}});
+  res.render("create-taster", { errors: {} });
 });
 
 app.post("/create-taster", tasterController.create);
@@ -59,6 +59,9 @@ app.get("/tasters/update/:id", tasterController.edit);
 app.post("/tasters/update/:id", tasterController.update);
 
 
+app.get("/create-tasting", (req, res) => {
+  res.render("create-tasting", { errors: {} });
+});
 
 app.get("/tastings", tastingController.list);
 app.get("/tastings/delete/:id", tastingController.delete);

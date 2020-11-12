@@ -19,9 +19,7 @@ async function main() {
      * If existing records then delete the current collections
      */
     if (results) {
-      console.info("deleting collection");
-      await db.collection("tastings").drop();
-      await db.collection("tasters").drop();
+      db.dropDatabase();
     }
 
     /**
@@ -84,29 +82,34 @@ async function main() {
           },
         },
       ]);
-
-      /**
-       * we can get rid of region_1/2 off our root document, since we've
-       * placed them in an array
-       */
-      await db
-        .collection("tastings")
-        .updateMany({}, { $unset: { region_1: "", region_2: " " } });
-
-      /**
-       * Finally, we remove nulls regions from our collection of arrays
-       * */
-      await db
-        .collection("tastings")
-        .updateMany({ regions: { $all: [null] } }, [
-          { $set: { regions: [{ $arrayElemAt: ["$regions", 0] }] } },
-        ]);
-      load.stop();
-      console.info(
-        `Wine collection set up! 🍷🍷🍷🍷🍷🍷🍷 \n I've also created a tasters collection for you 🥴 🥴 🥴`
-      );
-      process.exit();
     });
+
+
+    /**
+     * we can get rid of region_1/2 off our root document, since we've
+     * placed them in an array
+     */
+    await db
+      .collection("tastings")
+      .updateMany({}, { $unset: { region_1: "", region_2: " " } });
+
+    /**
+     * Finally, we remove nulls regions from our collection of arrays
+     * */
+    await db
+      .collection("tastings")
+      .updateMany({ regions: { $all: [null] } }, [
+        { $set: { regions: [{ $arrayElemAt: ["$regions", 0] }] } },
+      ])
+
+
+    load.stop();
+    console.info(
+      `Wine collection set up! 🍷🍷🍷🍷🍷🍷🍷 \n I've also created a tasters collection for you 🥴 🥴 🥴`
+    );
+
+
+    process.exit();
   } catch (error) {
     console.error("error:", error);
     process.exit();
