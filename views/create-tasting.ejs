@@ -27,41 +27,51 @@
     </head>
     <body>
       <%- include('common/header'); -%>
-      
-      
-      
+
       <div class="container">
-        <h1 class="text-center">Create A New Taster 🍷</h1>
+        <h1 class="text-center">Create A New Wine Tasting 🍷</h1>
         <div class="row justify-content-md-center">
           <div class="col-">
             <form method="POST" action="/create-taster">
               <div class="form-group">
-                <label for="name">Taster Name</label>
+                <label for="name">Wine Title </label>
                 <input
                   type="text"
                   class="form-control"
                   id="name"
-                  name="name"
-                  placeholder="Enter Name"
+                  name="title"
+                  placeholder="Enter Title"
                 />
 
-                <% if (errors['name']) { %>
-                <p style="color: red"><%= errors['name'].message %></p>
+                <% if (errors['title']) { %>
+                <p style="color: red"><%= errors['title'].message %></p>
                 <% } %>
               </div>
+
               <div class="form-group">
-                <label for="name">Twitter Handle</label>
+                <label for="name">Points</label>
                 <input
-                  type="text"
+                  type="number"
                   class="form-control"
-                  id="twitter"
-                  name="twitter"
+                  id="name"
+                  name="points"
                 />
-                <% if (errors['twitter']) { %>
-                <p style="color: red"><%= errors['twitter'].message %></p>
+
+                <% if (errors['points']) { %>
+                <p style="color: red"><%= errors['points'].message %></p>
                 <% } %>
               </div>
-              
+
+              <div class="form-group">
+                <label for="exampleFormControlSelect1">Select Taster</label>
+                <select
+                  class="form-control"
+                  name="taster_id"
+                  id="exampleFormControlSelect1"
+                >
+                  <option>Foo</option>
+                </select>
+              </div>
 
               <button type="submit" class="btn btn-primary">Submit</button>
             </form>
