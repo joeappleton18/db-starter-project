@@ -105,13 +105,13 @@ async function main() {
 
     db.collection("tastings").aggregate([
       { $group: { _id: "$variety" } },
-      { $project: { variety: "$_id", "_id": 0 } },
+      { $project: { name: "$_id", "_id": 0 } },
       { $out: "varieties" }
     ]).toArray();
 
     db.collection("tastings").aggregate([
       { $group: { _id: "$country" } },
-      { $project: { variety: "$_id", "_id": 0 } },
+      { $project: { name: "$_id", "_id": 0 } },
       { $out: "countries" }
     ]).toArray()
 
@@ -119,15 +119,25 @@ async function main() {
 
     await db.collection("tastings").aggregate([
       { $group: { _id: "$province" } },
-      { $project: { province: "$_id", "_id": 0 } },
+      { $project: { name: "$_id", "_id": 0 } },
       { $out: "provinces" }
     ]).toArray()
 
     await db.collection("tastings").aggregate([
-      { $group: { _id: "$region" } },
-      { $project: { province: "$_id", "_id": 0 } },
+      { $unwind: "$regions" },
+      { $group: { _id: "$regions" } },
+      { $project: { name: '$_id', _id: 0 } },
       { $out: "regions" }
     ]).toArray();
+
+
+    await db.collection("tastings").aggregate([
+      { $unwind: "$regions" },
+      { $group: { _id: "$regions" } },
+      { $project: { name: "$_id", "_id": 0 } },
+      { $out: "regions" }
+    ]).toArray() 
+
 
 
     load.stop();

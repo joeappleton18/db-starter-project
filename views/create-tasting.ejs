@@ -32,7 +32,7 @@
         <h1 class="text-center">Create A New Wine Tasting 🍷</h1>
         <div class="row justify-content-md-center">
           <div class="col-">
-            <form method="POST" action="/create-taster">
+            <form method="POST" action="/create-tasting">
               <div class="form-group">
                 <label for="name">Wine Title </label>
                 <input
@@ -69,7 +69,11 @@
                   name="taster_id"
                   id="exampleFormControlSelect1"
                 >
-                  <option>Foo</option>
+                  <% tasters.forEach( taster => { %>
+
+                  <option value="<%= taster._id %>"><%= taster.name %></option>
+
+                  <% }) %>
                 </select>
               </div>
 

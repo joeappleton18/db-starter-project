@@ -4,6 +4,7 @@ const path = require("path");
 const mongoose = require("mongoose");
 const chalk = require("chalk");
 const bodyParser = require("body-parser");
+const countriesModel = require("./models/Country");
 
 
 
@@ -59,9 +60,9 @@ app.get("/tasters/update/:id", tasterController.edit);
 app.post("/tasters/update/:id", tasterController.update);
 
 
-app.get("/create-tasting", (req, res) => {
-  res.render("create-tasting", { errors: {} });
-});
+app.get("/create-tasting", tastingController.createView);
+app.post("/create-tasting", tastingController.createView);
+
 
 app.get("/tastings", tastingController.list);
 app.get("/tastings/delete/:id", tastingController.delete);

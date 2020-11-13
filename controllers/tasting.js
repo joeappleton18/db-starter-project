@@ -1,4 +1,7 @@
 const Tasting = require("../models/Tasting");
+const Country = require("../models/Country");
+const Taster = require("../models/Taster");
+
 
 exports.list = async (req, res) => {
   const perPage = 10;
@@ -21,6 +24,22 @@ exports.list = async (req, res) => {
     res.status(404).send({ message: "could not list tastings" });
   }
 };
+
+
+exports.createView = async (req, res) => {
+  try {
+    const countries = await Country.find({});
+    const tasters = await Taster.find({});
+    res.render("create-tasting", {
+      countries: countries,
+      tasters: tasters,
+      errors: {}
+    });
+
+  } catch (e) {
+
+  }
+}
 
 exports.delete = async (req, res) => {
   const id = req.params.id;

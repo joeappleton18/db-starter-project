@@ -14,11 +14,20 @@ const tastingSchema = new Schema(
     province: String,
     country: String,
     winery: String,
+    
+    country_id: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Country",
+    },
+    province_id: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Province",
+    },
     taster_id: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Taster",
     },
-    regions: [String],
+    regions: [{type: mongoose.Schema.Types.ObjectId, ref: "region"}],
   },
   { timestamps: true }
 );
