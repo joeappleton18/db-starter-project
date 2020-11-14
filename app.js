@@ -8,11 +8,13 @@ const countriesModel = require("./models/Country");
 
 
 
+
 /**
  * Controllers (route handlers).
  */
 const tasterController = require("./controllers/taster");
 const tastingController = require("./controllers/tasting");
+const homeController = require("./controllers/home");
 
 const app = express();
 app.set("view engine", "ejs");
@@ -44,9 +46,7 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-app.get("/", (req, res) => {
-  res.render("index");
-});
+app.get("/", homeController.list);
 
 app.get("/create-taster", (req, res) => {
   res.render("create-taster", { errors: {} });
@@ -61,7 +61,8 @@ app.post("/tasters/update/:id", tasterController.update);
 
 
 app.get("/create-tasting", tastingController.createView);
-app.post("/create-tasting", tastingController.createView);
+app.post("/create-tasting", tastingController.create);
+app.get("/update-tasting/:id", tastingController.edit);
 
 
 app.get("/tastings", tastingController.list);
