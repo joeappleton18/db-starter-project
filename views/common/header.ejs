@@ -7,9 +7,16 @@
           Home <span class="sr-only">(current)</span>
         </a>
         <a class="nav-link" href="#"> Search Wines </a>
-        <a class="nav-link" href="#"> Write a Review </a>
+
         <a class="nav-link" href="tasters"> Tasters</a>
         <a class="nav-link" href="tastings"> Tastings</a>
+        <% if(user) { %>
+        <a class="nav-link" href="create-tasting"> Write a Review </a>
+        <a class="nav-link" href="logout"> <%= user.email %> (Logout) </a> <%
+        }%> <% if(!user) { %>
+        <a class="nav-link" href="login"> Login </a>
+        <a class="nav-link" href="join"> Register </a>
+        <% } %>
       </div>
     </div>
   </nav>

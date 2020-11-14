@@ -1,7 +1,9 @@
+
 const { MongoClient } = require("mongodb");
 const fs = require("fs").promises;
 const path = require("path");
 const loading = require("loading-cli");
+
 
 /**
  * constants
@@ -46,17 +48,19 @@ async function main() {
       {
         $group: {
           _id: "$taster_name",
-          social: { $push: "$taster_twitter_handle" },
-          total_tastings: { $sum: 1 },
+          twitter: { $first: "$taster_twitter_handle" },
+          tastings: { $sum: 1 },
         },
+
       },
       {
         $project: {
-          twitter: { $first: "$social" },
-          tastings: "$total_tastings",
+          _id: 0,
+          name: '$_id',
+          twitter: '$twitter',
+          tastings: '$tastings'
         },
       },
-      { $set: { name: "$_id", _id: "$total_tastings" } },
     ]);
     /**
      * Below, we output the results of our aggregate into a
@@ -136,7 +140,7 @@ async function main() {
       { $group: { _id: "$regions" } },
       { $project: { name: "$_id", "_id": 0 } },
       { $out: "regions" }
-    ]).toArray() 
+    ]).toArray()
 
 
 
