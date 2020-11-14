@@ -34,7 +34,6 @@ exports.create = async (req, res) => {
     res.redirect('/tasters/?message=taster has been created')
   } catch (e) {
     if (e.errors) {
-      console.log('here are our errors');
       console.log(e.errors);
       res.render('create-taster', { errors: e.errors })
       return;

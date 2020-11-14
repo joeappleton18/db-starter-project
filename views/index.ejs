@@ -50,9 +50,9 @@
           <h1>The Largest Collection of Wine Reviews in the World</h1>
           <p class="lead text-muted">Search, Explore and Favourite.</p>
           <h2>
-            <strong>129,971</strong> reviews from wines originating from
-            <strong>44</strong> different countries. Lovingly crafted by
-            <strong>20</strong> tasters
+            <strong><%= totalTastings %></strong> reviews from wines originating
+            from <strong><%= totalCountries %></strong> different countries.
+            Lovingly crafted by <strong><%= totalTasters %></strong> tasters
           </h2>
         </div>
       </section>
@@ -60,6 +60,7 @@
       <div class="album py-5 bg-light">
         <div class="container">
           <div class="row">
+            <% tasterCountSummary.forEach(taster => { %>
             <div class="col-md-4">
               <div class="card mb-4 shadow-sm">
                 <svg
@@ -75,11 +76,13 @@
                   <title>Joe Appleton</title>
                   <rect width="100%" height="100%" fill="#55595c" />
                   <text x="50%" y="50%" fill="#eceeef" dy=".3em">
-                    Joe Appleton
+                    <%= taster.name %>
                   </text>
                 </svg>
                 <div class="card-body">
-                  <p class="text-center"><strong> 10,000 Reviews</strong></p>
+                  <p class="text-center">
+                    <strong> <%= taster.total %> Reviews</strong>
+                  </p>
                   <div
                     class="d-flex justify-content-between align-items-center"
                   >
@@ -91,121 +94,11 @@
                         View
                       </button>
                     </div>
-                    <small class="text-muted">9 mins</small>
                   </div>
                 </div>
               </div>
             </div>
-            <div class="col-md-4">
-              <div class="card mb-4 shadow-sm">
-                <svg
-                  class="bd-placeholder-img card-img-top"
-                  width="100%"
-                  height="225"
-                  xmlns="http://www.w3.org/2000/svg"
-                  preserveAspectRatio="xMidYMid slice"
-                  focusable="false"
-                  role="img"
-                  aria-label="Placeholder: Joe Appleton"
-                >
-                  <title>Joe Appleton</title>
-                  <rect width="100%" height="100%" fill="#55595c" />
-                  <text x="50%" y="50%" fill="#eceeef" dy=".3em">
-                    Joe Appleton
-                  </text>
-                </svg>
-                <div class="card-body">
-                  <p class="text-center"><strong> 10,000 Reviews</strong></p>
-                  <div
-                    class="d-flex justify-content-between align-items-center"
-                  >
-                    <div class="btn-group">
-                      <button
-                        type="button"
-                        class="btn btn-sm btn-outline-secondary"
-                      >
-                        View
-                      </button>
-                    </div>
-                    <small class="text-muted">9 mins</small>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-md-4">
-              <div class="card mb-4 shadow-sm">
-                <svg
-                  class="bd-placeholder-img card-img-top"
-                  width="100%"
-                  height="225"
-                  xmlns="http://www.w3.org/2000/svg"
-                  preserveAspectRatio="xMidYMid slice"
-                  focusable="false"
-                  role="img"
-                  aria-label="Placeholder: Joe Appleton"
-                >
-                  <title>Joe Appleton</title>
-                  <rect width="100%" height="100%" fill="#55595c" />
-                  <text x="50%" y="50%" fill="#eceeef" dy=".3em">
-                    Joe Appleton
-                  </text>
-                </svg>
-                <div class="card-body">
-                  <p class="text-center"><strong> 10,000 Reviews</strong></p>
-                  <div
-                    class="d-flex justify-content-between align-items-center"
-                  >
-                    <div class="btn-group">
-                      <button
-                        type="button"
-                        class="btn btn-sm btn-outline-secondary"
-                      >
-                        View
-                      </button>
-                    </div>
-                    <small class="text-muted">9 mins</small>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-md-4">
-              <div class="card mb-4 shadow-sm">
-                <svg
-                  class="bd-placeholder-img card-img-top"
-                  width="100%"
-                  height="225"
-                  xmlns="http://www.w3.org/2000/svg"
-                  preserveAspectRatio="xMidYMid slice"
-                  focusable="false"
-                  role="img"
-                  aria-label="Placeholder: Joe Appleton"
-                >
-                  <title>Joe Appleton</title>
-                  <rect width="100%" height="100%" fill="#55595c" />
-                  <text x="50%" y="50%" fill="#eceeef" dy=".3em">
-                    Joe Appleton
-                  </text>
-                </svg>
-                <div class="card-body">
-                  <p class="text-center"><strong> 10,000 Reviews</strong></p>
-                  <div
-                    class="d-flex justify-content-between align-items-center"
-                  >
-                    <div class="btn-group">
-                      <button
-                        type="button"
-                        class="btn btn-sm btn-outline-secondary"
-                      >
-                        View
-                      </button>
-                    </div>
-                    <small class="text-muted">9 mins</small>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <% }) %>
           </div>
         </div>
       </div>
