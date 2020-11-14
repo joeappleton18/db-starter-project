@@ -4,7 +4,7 @@ const bcrypt = require('bcrypt');
 
 const userSchema = new Schema(
     {
-        email: { type: String, required: [true, 'email is required'], unique: ['email in use'] },
+        email: { type: String, required: [true, 'email is required'], unique: true },
         password: { type: String, required: [true, 'password is required'] }
     },
     { timestamps: true }
@@ -13,13 +13,12 @@ const userSchema = new Schema(
 userSchema.pre('save', async function (next) {
     console.log(this.password);
     try {
-
-        const hash = await bcrypt(this.password, 10);
-        console.log(hash)
+        const hash = await bcrypt.hash(this.password, 10);
+        this.password = hash;
+        next();
     } catch (e) {
         throw Error('could not hash password');
     }
-    const hashedPassword = bcrypt.hash()
 })
 
 module.exports = mongoose.model("User", userSchema);

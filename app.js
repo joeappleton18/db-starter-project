@@ -5,8 +5,8 @@ const mongoose = require("mongoose");
 const chalk = require("chalk");
 const bodyParser = require("body-parser");
 const countriesModel = require("./models/Country");
-
-
+const expressSession = require("express-session");
+const User = require("./models/User");
 
 
 /**
@@ -30,6 +30,9 @@ const { WEB_PORT, MONGODB_URI } = process.env;
  * connect to database
  */
 
+
+
+
 mongoose.connect(MONGODB_URI, { useNewUrlParser: true });
 mongoose.connection.on("error", (err) => {
   console.error(err);
@@ -47,9 +50,35 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
+app.use(expressSession({ secret: 'foo barr', cookie: { expires: new Date(253402300000000) } }))
+
+
+app.use("*", async (req, res, next) => {
+  global.user = false;
+  if (req.session.userID && !global.user) {
+    const user = await User.findById(req.session.userID);
+    global.user = user;
+  }
+  next();
+})
+
+const authMiddleware = async (req, res, next) => {
+  const user = await User.findById(req.session.userID);
+  if (!user) {
+    return res.redirect('/');
+  }
+  next()
+}
+
 app.get("/", homeController.list);
 
-app.get("/create-taster", (req, res) => {
+app.get("/logout", async (req, res) => {
+  req.session.destroy();
+  global.user = false;
+  res.redirect('/');
+})
+
+app.get("/create-taster", authMiddleware, (req, res) => {
   res.render("create-taster", { errors: {} });
 });
 
@@ -74,6 +103,10 @@ app.get("/join", (req, res) => {
 });
 
 app.post("/join", userController.create);
+app.get("/login", (req, res) => {
+  res.render('login-user', { errors: {} })
+});
+app.post("/login", userController.login);
 
 
 app.listen(WEB_PORT, () => {

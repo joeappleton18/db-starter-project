@@ -1,7 +1,7 @@
 const Tasting = require('../models/Tasting');
 
 exports.list = async (req, res) => {
-
+    console.log(req.session);
     try {
 
         /**
