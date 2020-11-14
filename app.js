@@ -15,6 +15,7 @@ const countriesModel = require("./models/Country");
 const tasterController = require("./controllers/taster");
 const tastingController = require("./controllers/tasting");
 const homeController = require("./controllers/home");
+const userController = require("./controllers/user");
 
 const app = express();
 app.set("view engine", "ejs");
@@ -67,6 +68,12 @@ app.get("/update-tasting/:id", tastingController.edit);
 
 app.get("/tastings", tastingController.list);
 app.get("/tastings/delete/:id", tastingController.delete);
+
+app.get("/join", (req, res) => {
+  res.render('create-user', { errors: {} })
+});
+
+app.post("/join", userController.create);
 
 
 app.listen(WEB_PORT, () => {
