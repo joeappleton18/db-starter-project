@@ -4,11 +4,10 @@ const fs = require("fs").promises;
 const path = require("path");
 const loading = require("loading-cli");
 
-
 /**
  * constants
  */
-const uri = "mongodb+srv://admin:Q7YStqTf6JbhXNrS@cluster0.lvl66.mongodb.net/wine?retryWrites=true&w=majority";
+const uri = "mongodb://localhost:27017/wine";
 const client = new MongoClient(uri);
 
 async function main() {
