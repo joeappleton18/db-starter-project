@@ -8,7 +8,6 @@ const countriesModel = require("./models/Country");
 const expressSession = require("express-session");
 const User = require("./models/User");
 
-
 /**
  * Controllers (route handlers).
  */
@@ -16,6 +15,9 @@ const tasterController = require("./controllers/taster");
 const tastingController = require("./controllers/tasting");
 const homeController = require("./controllers/home");
 const userController = require("./controllers/user");
+const tastingApiController = require("./controllers/api/tasting");
+const savedTastingApiController = require("./controllers/api/savedTasting");
+const savedTastingController = require("./controllers/savedTasting");
 
 const app = express();
 app.set("view engine", "ejs");
@@ -24,7 +26,7 @@ app.set("view engine", "ejs");
  * notice above we are using dotenv. We can now pull the values from our environment
  */
 
-const { WEB_PORT, MONGODB_URI } = process.env;
+const { PORT, MONGODB_URI } = process.env;
 
 /**
  * connect to database
@@ -90,13 +92,26 @@ app.get("/tasters/update/:id", tasterController.edit);
 app.post("/tasters/update/:id", tasterController.update);
 
 
+
 app.get("/create-tasting", tastingController.createView);
 app.post("/create-tasting", tastingController.create);
 app.get("/update-tasting/:id", tastingController.edit);
 
+app.get("/search-tastings",(req,res) => {
+  res.render('search-tastings', tastingApiController);
+});
+
+app.get("/saved-tastings", savedTastingController.list);
+
+app.get("/api/search-tastings", tastingApiController.list);
+app.post("/api/saved-tasting", savedTastingApiController.create);
+
+
 
 app.get("/tastings", tastingController.list);
 app.get("/tastings/delete/:id", tastingController.delete);
+
+app.get("api/tasting", )
 
 app.get("/join", (req, res) => {
   res.render('create-user', { errors: {} })
@@ -109,9 +124,9 @@ app.get("/login", (req, res) => {
 app.post("/login", userController.login);
 
 
-app.listen(WEB_PORT, () => {
+app.listen(PORT, () => {
   console.log(
-    `Example app listening at http://localhost:${WEB_PORT}`,
+    `Example app listening at http://localhost:${PORT}`,
     chalk.green("✓")
   );
 });

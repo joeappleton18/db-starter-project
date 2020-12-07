@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <html lang="en">
+    <head>
+      <meta charset="utf-8" />
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, shrink-to-fit=no"
+      />
+      <meta name="description" content="" />
+      <title>Search Tastings</title>
+
+      <link
+        rel="canonical"
+        href="https://getbootstrap.com/docs/4.5/examples/album/"
+      />
+
+      <!-- Bootstrap core CSS -->
+      <link
+        rel="stylesheet"
+        href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+        crossorigin="anonymous"
+      />
+      <link href="css/album.css" rel="stylesheet" />
+      <script src="scripts/search-tasting.js"></script>
+      
+    </head>
+    <body>
+      <%- include('common/header'); -%>
+
+      <div class="container">
+        <h1 class="text-center">🍷 Search Tastings 🍷</h1>
+        <form>
+        <div class="input-group mb-3">
+                <input
+                type="text"
+                class="form-control"
+                placeholder="Type any text"
+                id="searchInput"
+                />
+                <div class="input-group-append">
+                    <button onclick="handleSubmit()" class="btn btn-outline-secondary" type="button">
+                        🍷 Search Wine Tastings 🍷
+                    </button>
+                </div>
+            </form>
+            <div id="wineItems"></div>
+
+
+         </div>
+       
+    </body>
+    </html>
+</html>

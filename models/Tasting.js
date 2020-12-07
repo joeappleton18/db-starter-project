@@ -32,4 +32,5 @@ const tastingSchema = new Schema(
   { timestamps: true }
 );
 
+tastingSchema.index({'$**': 'text'});
 module.exports = mongoose.model("Tasting", tastingSchema);
