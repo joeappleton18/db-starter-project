@@ -7,7 +7,6 @@ const { MONGODB_URI } = process.env;
 /**
  * constants
  */
-const uri = MONGODB_URI;
 const client = new MongoClient(MONGODB_URI);
 
 async function main() {
