@@ -5,8 +5,6 @@ const path = require("path");
 const loading = require("loading-cli");
 const { MONGODB_URI } = process.env;
 
-const client = new MongoClient(MONGODB_URI);
-
 
 /**
  * constants
