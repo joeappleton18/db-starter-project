@@ -1,7 +1,11 @@
 const { MongoClient } = require("mongodb");
+require("dotenv").config();
 const fs = require("fs").promises;
 const path = require("path");
 const loading = require("loading-cli");
+const { MONGODB_URI } = process.env;
+
+
 
 /**
  * constants
