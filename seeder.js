@@ -1,3 +1,4 @@
+
 const { MongoClient } = require("mongodb");
 require("dotenv").config();
 const fs = require("fs").promises;
@@ -6,12 +7,11 @@ const loading = require("loading-cli");
 const { MONGODB_URI } = process.env;
 
 
-
 /**
  * constants
  */
-const uri = "mongodb://localhost:27017/wine";
-const client = new MongoClient(uri);
+const client = new MongoClient(MONGODB_URI);
+
 
 async function main() {
   try {
