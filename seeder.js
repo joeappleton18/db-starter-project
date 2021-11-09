@@ -1,7 +1,11 @@
 const { MongoClient } = require("mongodb");
+require("dotenv").config();
 const fs = require("fs").promises;
 const path = require("path");
 const loading = require("loading-cli");
+const { MONGODB_URI } = process.env;
+
+
 
 /**
  * constants
@@ -19,7 +23,9 @@ async function main() {
      * If existing records then delete the current collections
      */
     if (results) {
-      db.dropDatabase();
+      console.info("deleting collection");
+      await db.collection("tastings").drop();
+      await db.collection("tasters").drop();
     }
 
     /**
@@ -65,9 +71,8 @@ async function main() {
     const wineTasters = await wineTastersRef.toArray();
     await db.collection("tasters").insertMany(wineTasters);
 
-    /** This data manipulation is to reference each document in the
-     * tastings collection to a taster id. Further to this we also take the opportunity to
-     * tidy up points (converting it to a int) and regions, adding them to a an array
+    /** Our final data manipulation is to reference each document in the
+     * tastings collection to a taster id
      */
 
     const updatedWineTastersRef = db.collection("tasters").find({});
@@ -82,34 +87,29 @@ async function main() {
           },
         },
       ]);
+
+      /**
+       * we can get rid of region_1/2 off our root document, since we've
+       * placed them in an array
+       */
+      await db
+        .collection("tastings")
+        .updateMany({}, { $unset: { region_1: "", region_2: " " } });
+
+      /**
+       * Finally, we remove nulls regions from our collection of arrays
+       * */
+      await db
+        .collection("tastings")
+        .updateMany({ regions: { $all: [null] } }, [
+          { $set: { regions: [{ $arrayElemAt: ["$regions", 0] }] } },
+        ]);
+      load.stop();
+      console.info(
+        `Wine collection set up! 🍷🍷🍷🍷🍷🍷🍷 \n I've also created a tasters collection for you 🥴 🥴 🥴`
+      );
+      process.exit();
     });
-
-
-    /**
-     * we can get rid of region_1/2 off our root document, since we've
-     * placed them in an array
-     */
-    await db
-      .collection("tastings")
-      .updateMany({}, { $unset: { region_1: "", region_2: " " } });
-
-    /**
-     * Finally, we remove nulls regions from our collection of arrays
-     * */
-    await db
-      .collection("tastings")
-      .updateMany({ regions: { $all: [null] } }, [
-        { $set: { regions: [{ $arrayElemAt: ["$regions", 0] }] } },
-      ])
-
-
-    load.stop();
-    console.info(
-      `Wine collection set up! 🍷🍷🍷🍷🍷🍷🍷 \n I've also created a tasters collection for you 🥴 🥴 🥴`
-    );
-
-
-    process.exit();
   } catch (error) {
     console.error("error:", error);
     process.exit();
