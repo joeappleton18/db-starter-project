@@ -7,15 +7,8 @@ const loading = require("loading-cli");
 const { MONGODB_URI } = process.env;
 
 
-/**
- * constants
- */
+
 const client = new MongoClient(MONGODB_URI);
-/**
- * constants
- */
-const uri = "mongodb://localhost:27017/wine";
-const client = new MongoClient(uri);
 
 async function main() {
   try {
@@ -139,16 +132,6 @@ async function main() {
       { $project: { name: '$_id', _id: 0 } },
       { $out: "regions" }
     ]).toArray();
-
-
-    await db.collection("tastings").aggregate([
-      { $unwind: "$regions" },
-      { $group: { _id: "$regions" } },
-      { $project: { name: "$_id", "_id": 0 } },
-      { $out: "regions" }
-    ]).toArray()
-
-
 
     load.stop();
     console.info(
